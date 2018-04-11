@@ -1,20 +1,28 @@
 const express = require('express');
 
+
+const Thread = require('../models/Thread');
+
+
 const router = express.Router();
 
 
-router.get('/', (req, res) => {
-	res.json({
-		data: [
-			{
-				title:'Sistema de matricula fuera de servicio'
-			},
-			{
-				title:'El problema de transporte en panama'
-			},
-		],
-	});
+
+
+
+
+router.get('/', async (req, res) => {
+
+	const threads = await Thread.find();
+
+ res.json({
+
+   data: threads ,
+
+ });
+
 });
 
 
-module.exports = router;
+
+module.exports = router; 
