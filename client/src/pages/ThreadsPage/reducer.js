@@ -7,13 +7,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case 'THREADS_LOAD_REQUEST':
+		case 'forum-app/THREADS_LOAD_REQUEST':
 			return state;
 
-		case 'THREADS_LOAD_SUCCESS':
+		case 'forum-app/THREADS_LOAD_SUCCESS':
 			return state;
 
-		case 'THREADS_LOAD_FAILURE':
+		case 'forum-app/THREADS_LOAD_FAILURE':
 			return state;
 
 		default:
