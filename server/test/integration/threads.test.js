@@ -1,12 +1,9 @@
 const chai = require('chai');
-
 const request = require('supertest');
 
 
 const app = require('../../src/app');
-
 const fixtures = require('./fixtures');
-
 const mongoosehelper = require('./mongoosehelper');
 
 
@@ -18,7 +15,6 @@ describe('Threads endpoint', () => {
 
 	describe('when callng GET /threads', () => {
 
-
 		describe('when the database has threads', () => {
 
 			before(async () => await fixtures.seedThreads());
@@ -27,9 +23,7 @@ describe('Threads endpoint', () => {
 
 			it('return a list of threads', () => {
 
-
 				return request(app).get('/threads')
-
 
 					.expect('Content-type', /json/)
 
@@ -40,7 +34,6 @@ describe('Threads endpoint', () => {
 						const {
 							body
 						} = response;
-
 
 						expect(body.data).to.have.length(2);
 
@@ -52,9 +45,7 @@ describe('Threads endpoint', () => {
 
 						expect(body.data[1].slug).to.equal('el-problema-de-transporte-en-panama');
 
-
 					});
-
 
 			});
 
@@ -62,12 +53,9 @@ describe('Threads endpoint', () => {
 
 		describe('when there is no data', () => {
 
-
 			it('returns an empty arrays if there are no threads', () => {
 
-
 				return request(app).get('/threads')
-
 
 					.expect('Content-type', /json/)
 
@@ -79,27 +67,14 @@ describe('Threads endpoint', () => {
 							body
 						} = response;
 
-
 						expect(body.data).to.have.length(0);
 
-
-
 					});
-
 
 			});
 
 		});
 
-
 	});
 
-
-	describe('when calling POST /', () => {
-
-
-	})
-
-
-
-})
+});
