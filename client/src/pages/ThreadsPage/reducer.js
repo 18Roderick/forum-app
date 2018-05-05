@@ -18,15 +18,21 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case TYPE.LOAD_THREADS_REQUEST:
-    
+      state.isLoading = true;
+      state.threads = [];
+      state.errorMessage = null;
       return state;
 
     case TYPE.LOAD_THREADS_SUCCES:
-
+      state.isLoading = false;
+      state.threads = action.payload;
+      state.errorMessage = null;
       return state;
 
     case TYPE.LOAD_THREADS_FAILURE:
-
+      state.isLoading = false;
+      state.threads = [];
+      state.errorMessage = action.payload.message;
       return state;
 
     default:

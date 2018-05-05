@@ -4,7 +4,46 @@ export const LOAD_THREADS_SUCCES = 'forum-app/LOAD_THREADS_SUCCESS';
 
 export const LOAD_THREADS_FAILURE = 'forum-app/LOAD_THREADS_FAILURE';
 
-export function loadThreadsRequest(){
+
+export function loadThreads() {
+
+
+	return dispatch => {
+
+
+		const url = 'http://localhost/';
+
+
+		dispatch(loadThreadsRequest);
+
+
+		fetch(url)
+			.then(response => {
+
+				if (!response.ok) {
+
+					return response.statusText;
+
+				}
+
+				return response.json();
+
+			})
+			.then(threads => {
+
+				dispatch(loadThreadsSuccess(threads));
+
+			})
+			.catch((error) => {
+
+				dispatch(loadThreadsFailure(new Error(`Error en la peticion ${error}`)));
+
+			})
+	};
+
+}
+
+export function loadThreadsRequest() {
 
 	return {
 		type: LOAD_THREADS_REQUEST,
@@ -12,7 +51,7 @@ export function loadThreadsRequest(){
 
 }
 
-export function loadThreadsSuccess(threads){
+export function loadThreadsSuccess(threads) {
 
 	return {
 		type: LOAD_THREADS_SUCCES,
@@ -21,9 +60,9 @@ export function loadThreadsSuccess(threads){
 
 }
 
-export function loadThreadsFailure(error){
+export function loadThreadsFailure(error) {
 
-  return {
+	return {
 		type: LOAD_THREADS_FAILURE,
 		payload: error,
 		error: true,
