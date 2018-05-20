@@ -11,10 +11,10 @@ export function loadThreads() {
 	return dispatch => {
 
 
-		const url = 'http://localhost/';
+		const url = '/threads';
 
 
-		dispatch(loadThreadsRequest);
+		dispatch(loadThreadsRequest());
 
 
 		fetch(url)
@@ -22,7 +22,7 @@ export function loadThreads() {
 
 				if (!response.ok) {
 
-					return response.statusText;
+					throw new Error(`Error en la peticion ${response.statusText}`);
 
 				}
 
@@ -30,13 +30,12 @@ export function loadThreads() {
 
 			})
 			.then(threads => {
-
-				dispatch(loadThreadsSuccess(threads));
+				dispatch(loadThreadsSuccess(threads.data));
 
 			})
 			.catch((error) => {
 
-				dispatch(loadThreadsFailure(new Error(`Error en la peticion ${error}`)));
+				dispatch(loadThreadsFailure(error));
 
 			})
 	};
@@ -52,7 +51,6 @@ export function loadThreadsRequest() {
 }
 
 export function loadThreadsSuccess(threads) {
-
 	return {
 		type: LOAD_THREADS_SUCCES,
 		payload: threads,

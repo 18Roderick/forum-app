@@ -7,33 +7,26 @@ const initialState = {
   errorMessage: null
 };
 
-const THREADS_LOAD_REQUEST = 'forum-app/THREADS_LOAD_REQUEST';
-
-const THREADS_LOAD_SUCCESS = 'forum-app/THREADS_LOAD_SUCCESS';
-
-const THREADS_LOAD_FAILURE = 'forum-app/THREADS_LOAD_FAILURE';
-
 
 export default (state = initialState, action) => {
   switch (action.type) {
 
     case TYPE.LOAD_THREADS_REQUEST:
-      state.isLoading = true;
-      state.threads = [];
-      state.errorMessage = null;
-      return state;
+      return Object.assign({}, state, {
+        isLoading: true,
+      })
 
     case TYPE.LOAD_THREADS_SUCCES:
-      state.isLoading = false;
-      state.threads = action.payload;
-      state.errorMessage = null;
-      return state;
+      return Object.assign({}, state, {
+        threads: action.payload,
+        isLoading: false,
+      })
 
     case TYPE.LOAD_THREADS_FAILURE:
-      state.isLoading = false;
-      state.threads = [];
-      state.errorMessage = action.payload.message;
-      return state;
+      return Object({}, state, {
+        isLoading: false,
+        errorMessage: action.payload.message
+      })
 
     default:
       return state;
